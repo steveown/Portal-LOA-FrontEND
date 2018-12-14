@@ -1,0 +1,24 @@
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+pet1={"pet":"Melody","raca":"lhasa apso", "idade":12, "distancia":30}
+pet2={"pet":"Fufy","raca":"Dalmata","idade":8, "distancia":15}
+pet3={"pet":"Luke","raca":"Labrador","idade":6, "distancia":45}
+pet4={"pet":"Retina","raca":"beagle","idade":10, "distancia":22}
+pet5={"pet":"Cristalina","raca":"Pinscher","idade":4, "distancia":17}
+
+
+@app.route("/pets")
+def pets_routes():
+	return jsonify([pet1,pet2,pet3,pet4, pet5])
+
+@app.route("/pets/<distancia_moto>")
+def pets_routes_with_distance(distancia_moto):
+	pets_no_raio = []
+	for pet in [pet1,pet2,pet3,pet4, pet5]:
+		if pet["distancia"]<=int(distancia_moto):
+			pets_no_raio.append(pet)
+	return jsonify(pets_no_raio)
+
+app.run(host="192.168.0.108", port=5000)

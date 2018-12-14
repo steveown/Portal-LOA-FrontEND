@@ -1,0 +1,17 @@
+
+Python
+	Flask - Conexão Interface Web
+	Tweepy - Raspagem de Dados Twitter
+	Facepy - Api Facebook para a raspagem de dados e Autenticação
+	Algoritmo de PLN - Criando NLTK
+	Machine Learning - Biblioteca Especificas para ajuda SciPy
+
+Banco de Dados
+	PostgreSQL - Guardar Dados de Usuarios
+	MongoDB - Guardar CSV gerado de tweets/postagens raspados.
+	
+
+FrontEnd
+	Html
+	CSS/Bootstrap
+	JavaScript
