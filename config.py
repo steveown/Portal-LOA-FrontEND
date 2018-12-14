@@ -1,0 +1,4 @@
+DEBUG = True
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:sa759571@localhost/Spectre'
+SECRET_KEY = "Bruno1234"

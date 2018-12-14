@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Portal Modelo - interface 1.0</title>
+	<meta charset="utf-8" />
+    <script type='text/javascript'>
+    var map, infobox, dataLayer;
+    var usgsEarthquakeUrl = 'https://earthquake.usgs.gov/fdsnws/event/1/query?minmagnitude=3&format=geojson';
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#myMap', {
+            zoom: 2
+        });
+        //Create an infobox.
+        infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
+        infobox.setMap(map);
+        //Create a layer to add the GeoJSON data to.
+        dataLayer = new Microsoft.Maps.Layer();
+        map.layers.insert(dataLayer);
+        //Add click event to the layer.
+        Microsoft.Maps.Events.addHandler(dataLayer, 'click', showInfobox);
+
+        //Load the GeoJSON module and read the GeoJSON feed.
+        Microsoft.Maps.loadModule('Microsoft.Maps.GeoJson', function () {
+            Microsoft.Maps.GeoJson.readFromUrl(usgsEarthquakeUrl, function (shapes) {
+                //Add shapes to the layer.
+                dataLayer.add(shapes);
+            }, 'callback');
+        });
+    }
+    function showInfobox(e){
+        var shape = e.target; //Get the clicked shape.
+        var loc = e.location; //Default to the location of the mouse event to show the infobox.
+        //If the shape is a pushpin, use it's location to display the infobox.
+        if(shape instanceof Microsoft.Maps.Pushpin){
+            loc = shape.getLocation();
+        }
+        //Display the infoboc
+        infobox.setOptions({location: loc, title: shape.metadata.title, visible: true });
+    }
+    </script>
+    <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=[YOUR_BING_MAPS_KEY]' async defer></script>
+
+<link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css" type='text/css'/>
+<link rel="stylesheet" href="static/css/template-branco.css" type='text/css'/>
+<link rel="stylesheet" href="static/css/style.css" type="text/css" >
+<link rel="stylesheet" href="static/font-awesome/css/font-awesome.min.css" type='text/css'/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,800,700' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="static/jplayer/skin/portalpadrao01/jplayer.css" type='text/css'/> 
+</head>
+<body>
+    <a class="hide" id="topo" href="#accessibility">Ir direto para menu de acessibilidade.</a>
+    <noscript>
+      <div class="error minor-font">
+        Seu navegador de internet está sem suporte à JavaScript. Por esse motivo algumas funcionalidades do site podem não estar acessíveis.
+      </div>
+    </noscript>
+    <div id="barra-brasil">
+        <a href="http://brasil.gov.br" title="Acesse para conhecer todos os serviços e informações do Governo Brasileiro na Internet.">Portal do Governo Brasileiro</a>     
+    </div>
+    <div class="layout">
+        <header>
+            <div class="container"> 
+                <div class="row-fluid accessibility-language-actions-container">                            
+                    <div class="span6 accessibility-container">                   
+                    </div>
+                    <div class="span6 language-and-actions-container">
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div id="logo" class="span8">
+                        <a href="index.html" title="Descrição do Portal Padrão">                            
+                            <span class="portal-title-1">Laboratório de Estudos do Oceano e da Atmosfera</span>
+                            <img src="static/img/logo.png" width="100" height="100" align="left">
+                            <h1 class="portal-title corto">Laboratório de Estudos do Oceano e da Atmosfera</h1>
+                            <span class="portal-description">Instituto Nacional de Pesquisas Espaciais</span>
+                        </a>
+                    </div>
+					<div><h1>Bom dia <strong>Bruno da Silva Andrade</strong><button onclick="/dashboard"> Sair</button></h1></div>
+                    <div class="span4">
+
+                        <div id="portal-searchbox" class="row">
+                            <form action="#" class="pull-right">
+                               <div class="form-group">
+
+                    </div>
+
+
+								</div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sobre">
+                <div class="container">
+                    <nav class="menu-servicos pull-right">
+                        <ul>
+                            <li class="portalservicos-item">
+                                <a title="Perguntas frequentes" href="interna-perguntas-frequentes.html"></a>
+                            </li>
+                        </ul>
+                        <span class="hide"></span>
+                    </nav>
+                </div>
+            </div>
+        </header>
+<main>
+
+	<div class="tab-pane" id="new-operacao">
+		<p><div class="container">
+    <div class="row-fluid">
+
+	<fieldset style="width:1080px;margin-top:10px;">
+        <legend>Mapa</legend>
+    </fieldset>
+	<div id="myMap" style="position:relative;width:1080px;height:1920px;"></div>
+</div>
+	</div>
+	</div>
+
+
+
+</main>
+<footer>
+    		<div class="footer-atalhos">
+    			<div class="container">
+    				<div class="pull-right voltar-ao-topo"><a href="#portal-siteactions"><i class="icon-chevron-up"></i>&nbsp;Voltar para o topo</a></div>
+    			</div>
+    		</div>
+    		<div class="container container-menus">
+    			<div id="footer" class="row footer-menus">
+    				<span class="hide">Início da navegação de rodapé</span>
+    				<div class="span3">
+						<nav class="row assuntos nav">
+							<h2>Assuntos</h2>
+							<ul>
+								<li><a href="#" title="Editoria A">Editoria A</a></li>
+								<li><a href="#" title="Editoria B">Editoria B</a></li>
+								<li><a href="#" title="Editoria C">Editoria C</a></li>								
+							</ul>
+						</nav>    					
+    				</div>
+					<div class="span3">
+						<nav class="row servicos nav">
+							<h2>Serviços</h2>
+							<ul>
+								<li class="portalservicos-item">
+									<a title="Perguntas frequentes" href="#">Perguntas frequentes</a>
+								</li>
+								<li class="portalservicos-item">
+									<a title="Contato" href="#">Contato</a>
+								</li>
+								<li class="portalservicos-item">
+									<a title="Serviços da [Denominação]" href="#">Serviços da [Denominação]</a>
+								</li>
+								<li class="portalservicos-item">
+									<a title="Dados abertos" href="#">Dados abertos</a>
+								</li>
+								<li class="portalservicos-item">
+									<a title="Área de imprensa" href="#">Área de imprensa</a>
+								</li>
+							</ul>
+						</nav>							
+					</div>
+					<div class="span3">
+						<nav class="row redes-sociais nav">
+							<h2>Redes Sociais</h2>
+							<ul>
+								<li class="portalredes-item"><a title="Twitter" href="https://twitter.com/twitter">
+	    							Twitter</a>
+	    						</li>
+	    						<li class="portalredes-item"><a title="YouTube" href="http://youtube.com/youtube">
+	    							Youtube</a>
+	    						</li>
+	    						<li class="portalredes-item"><a title="Facebook" href="http://facebook.com/facebook">
+	    							Facebook</a>
+	    						</li>
+	    						<li class="portalredes-item"><a title="Flickr" href="http://flickr.com/flickr">
+	    							Flickr</a>
+	    						</li>
+							</ul>
+						</nav>						
+					</div>
+					<div class="span3">
+						<nav class="row rss nav">
+							<h2>RSS</h2>
+							<ul>
+								<li><a href="#" title="O que é?">O que é?</a></li>
+								<li><a href="#" title="Assine">Assine</a></li>
+							</ul>
+						</nav>
+						<nav class="row sobre nav">
+							<h2>Sobre o site</h2>
+							<ul>
+								<li><a href="#">Acessibilidade</a></li>
+								<li><a href="#">Mapa do site</a></li>
+								<li><a href="#">Versión en Español - Versão em Espanhol</a></li>
+								<li><a href="#">English version - Versão em Inglês</a></li>
+							</ul>
+						</nav>
+					</div>
+					<span class="hide">Fim da navegação de rodapé</span>					
+    			</div>
+    		</div>
+			<div class="footer-logos">
+				<div class="container">
+					<a href="http://www.acessoainformacao.gov.br/" class="logo-acesso pull-left"><img src="static/images/acesso-a-informacao.png" alt="Acesso a Informação"></a>
+					<span class="hide">&nbsp;</span>
+					<a href="http://www.brasil.gov.br/" class="brasil pull-right"><img src="static/images/brasil.png" alt="Brasil - Governo Federal"></a>
+				</div>				
+			</div>
+			<div class="footer-ferramenta">
+				<div class="container">
+					<p>Interface preparada para desenvolvimento com o CMS <a href="http://www.joomla.org">Joomla</a></p>		
+				</div>				
+			</div>
+    		<div class="footer-atalhos visible-phone">
+    			<div class="container">
+    				<span class="hide">Fim do conteúdo da página</span>
+    				<div class="pull-right voltar-ao-topo"><a href="#portal-siteactions"><i class="icon-chevron-up"></i>&nbsp;Voltar para o topo</a></div>
+    			</div>
+    		</div>
+    	</footer>
+
+
+
+
+<script type="text/javascript" src="static/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="static/js/uploadr.js"></script>
+<script src="static/js/jquery.min.js" type="text/javascript"></script>
+<script src="static/js/jquery-noconflict.js" type="text/javascript"></script>
+<script src="static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="static/js/jquery.cookie.js" type="text/javascript"></script>
+<script src="static/js/template.js" type="text/javascript"></script>
+<script src="static/jplayer/js/jquery.jplayer.min.js" type="text/javascript"></script>
+<script src="http://barra.brasil.gov.br/barra.js?cor=verde" type="text/javascript"></script>
+</body>
+</html>
